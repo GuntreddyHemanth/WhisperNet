@@ -10,4 +10,4 @@ const ConnectTOMongoose = async () => {
     }
 }
 
-module.exports = { ConnectTOMongoose }
+module.exports =  ConnectTOMongoose 
