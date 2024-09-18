@@ -3,6 +3,8 @@ const dotenv = require("dotenv")
 
 const authRouter = require("./routes/auth.route")
 const messageRouter = require("./routes/message.route")
+const userRouter = require("./routes/user.route")
+
 
 const ConnectTOMongoose = require("./db/connectMongdb")
 const cookieParser = require("cookie-parser")
@@ -21,6 +23,8 @@ app.use(cookieParser())
 
 app.use("/api/auth", authRouter)
 app.use("/api/messages", messageRouter)
+app.use("/api/users", userRouter)
+
 
 app.listen(PORT, () =>{
     ConnectTOMongoose()
