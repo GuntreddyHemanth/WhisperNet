@@ -13,14 +13,14 @@ const SignUp = () => {
 						<label className='label p-2'>
 							<span className='text-base label-text'>Full Name</span>
 						</label>
-						<input type='text' placeholder='John Doe' className='w-full input input-bordered  h-10' />
+						<input type='text' placeholder='John Doe' className='w-full input input-bordered  bg-gray-700 border-gray-600 text-white  h-10' />
 					</div>
 
 					<div>
 						<label className='label p-2 '>
 							<span className='text-base label-text'>Username</span>
 						</label>
-						<input type='text' placeholder='johndoe' className='w-full input input-bordered h-10' />
+						<input type='text' placeholder='johndoe' className='w-full input input-bordered  bg-gray-700 border-gray-600 text-white h-10' />
 					</div>
 
 					<div>
@@ -30,7 +30,7 @@ const SignUp = () => {
 						<input
 							type='password'
 							placeholder='Enter Password'
-							className='w-full input input-bordered h-10'
+							className='w-full input input-bordered h-10  bg-gray-700 border-gray-600 text-white'
 						/>
 					</div>
 
@@ -41,7 +41,7 @@ const SignUp = () => {
 						<input
 							type='password'
 							placeholder='Confirm Password'
-							className='w-full input input-bordered h-10'
+							className='w-full input input-bordered h-10 bg-gray-700 border-gray-600 text-white'
 						/>
 					</div>
 
