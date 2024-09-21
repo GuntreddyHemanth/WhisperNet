@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { toast, Bounce } from 'react-toastify'
+import { useAuthContex } from '../context/AuthContext'
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false)
+    const {setAuthUser} = useAuthContex()
 
     const signup  = async ({fullName, userName, password, confirmPassword, gender}) => {
         const success  = handleInputError({fullName, userName, password, confirmPassword, gender})
@@ -20,8 +22,12 @@ const useSignup = () => {
             })
 
             const data = res.data
-            console.log(data)
-            
+            if (data.error){
+                throw new Error(data.error)
+            }
+
+            localStorage.setItem("chat-user", JSON.stringify(data))
+            setAuthUser(data)
             // const res = await fetch("/api/auth/signup", {
 			// 	method: "POST",
 			// 	headers: { "Content-Type": "application/json" },
