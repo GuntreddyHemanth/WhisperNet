@@ -25,7 +25,7 @@ module.exports.sendMessage = async (req, res) => {
         })
 
         if (newMessage){
-            conversation.message.push(newMessage._id)
+            conversation.messages.push(newMessage._id)
         }
 
         // this will takes more time to compute the result
@@ -53,14 +53,14 @@ module.exports.getMessages = async (req, res) => {
 
         const conversation = await Conversation.findOne({
             participants:{ $all: [senderId, userTochatId]}
-        }).populate("message")
+        }).populate("messages")
 
-        // console.log(conversation)
+        console.log(conversation)
 
         if (!conversation) return res.status(200).json([])
 
-        const messages = conversation.message
-        // console.log(messages)
+        const messages = conversation.messages
+        console.log(messages)
 
         res.status(200).json(messages)
         

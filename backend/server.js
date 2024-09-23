@@ -10,15 +10,15 @@ const ConnectTOMongoose = require("./db/connectMongdb")
 const cookieParser = require("cookie-parser")
 
 const app = express()
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000; // This will use 5000 if set in .env
 
 dotenv.config()
 app.use(express.json())
 app.use(cookieParser())
 
-// app.get("/", (req, res) => {
-//     res.send("hello world!")
-// })
+app.get("/", (req, res) => {
+    res.send("hello world!")
+})
 
 
 app.use("/api/auth", authRouter)
