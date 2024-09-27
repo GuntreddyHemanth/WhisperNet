@@ -1,4 +1,5 @@
 import "./App.css";
+// import './index.css'
 import { useAuthContex } from "./context/AuthContext";
 import Home from "./Pages/home/Home";
 import Login from "./Pages/login/Login";
