@@ -8,8 +8,9 @@ const userRouter = require("./routes/user.route")
 
 const ConnectTOMongoose = require("./db/connectMongdb")
 const cookieParser = require("cookie-parser")
+const { app, server } = require("./sockets/socket")
 
-const app = express()
+
 const PORT = process.env.PORT || 8000; // This will use 5000 if set in .env
 
 dotenv.config()
@@ -26,7 +27,7 @@ app.use("/api/messages", messageRouter)
 app.use("/api/users", userRouter)
 
 
-app.listen(PORT, () =>{
+server.listen(PORT, () =>{
     ConnectTOMongoose()
     console.log(`hi there! ${PORT}`)
 })

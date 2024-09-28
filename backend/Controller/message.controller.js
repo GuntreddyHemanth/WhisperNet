@@ -1,5 +1,6 @@
 const Conversation = require("../modles/conversation.model");
 const Message = require("../modles/messages.model");
+const { getReceiverSocketId } = require("../sockets/socket");
 
 
 module.exports.sendMessage = async (req, res) => {
@@ -34,6 +35,15 @@ module.exports.sendMessage = async (req, res) => {
 
         await Promise.all([conversation.save(), newMessage.save()]); // this will run paralle with out any delay basical these two start at same time 
 
+        const sendMessage = (newMessage, receiverId) => {
+            const receiverSocketId = getReceiverSocketId(receiverId);
+            if (receiverSocketId) {
+                io.to(receiverSocketId).emit("newMessage", newMessage);
+            } else {
+                console.log("Receiver is not online");
+            }
+        };        
+
         res.status(201).json({
             newMessage
         })
@@ -55,13 +65,9 @@ module.exports.getMessages = async (req, res) => {
             participants:{ $all: [senderId, userTochatId]}
         }).populate("messages")
 
-        console.log(conversation)
-
         if (!conversation) return res.status(200).json([])
 
         const messages = conversation.messages
-        console.log(messages)
-
         res.status(200).json(messages)
         
     } catch (error) {
