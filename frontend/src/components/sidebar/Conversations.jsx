@@ -4,19 +4,19 @@ import { getRandomEmoji } from "../../utils/emoji";
 import Conversation from "./Conversation";
 
 const Conversations = () => {
-	const {loading, conversation} = useGetConversation();
+	const {loading, conversations} = useGetConversation();
 	// console.log("Coversation :", conversation)
 	return (
 		<div className='py-2 flex flex-col overflow-auto'>
-			{conversation.map((message, idx) =>(
+			{conversations.map((conversation, idx) =>(
 				<Conversation
-				    key = {message._id}
-					conversation = {message}
+				    key = {conversation._id}
+					conversation = {conversation}
 					emojis = {getRandomEmoji()}
-					lastIdx = {idx === conversation.length - 1}
-					loading = {loading}
+					lastIdx = {idx === conversations.length - 1}
 				/>
 			))}
+			{loading ? <span className='loading loading-spinner mx-auto'></span> : null}
 		</div>
 	);
 };

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const SearchInput = () => {
 	const [search, setSearch] = useState("")
 	const {setSelectedConversation} = useConversation()
-	const {conversation} = useGetConversation()
+	const {conversations} = useGetConversation()
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -17,9 +17,9 @@ const SearchInput = () => {
 			return toast.error("Search must be at least 3 characters long")
 		}
 
-		const conversations = conversation.find((c) => c.fullName.toLowerCase().includes(search.toLocaleLowerCase()))
-		if (conversations){
-			setSelectedConversation(conversations)
+		const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLocaleLowerCase()))
+		if (conversation){
+			setSelectedConversation(conversation)
 			setSearch("");
 		} else {
 			toast.error("No such user found!")

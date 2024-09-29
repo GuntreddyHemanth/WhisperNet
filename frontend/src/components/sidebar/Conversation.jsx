@@ -1,7 +1,7 @@
 import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConverstaion";
 
-const Conversation = ({conversation, emojis, lastIdx, loading }) => {
+const Conversation = ({conversation, emojis, lastIdx}) => {
 	const {selectedConversation, setSelectedConversation} = useConversation()
 
 	const isSelected = selectedConversation?._id === conversation._id
@@ -18,11 +18,8 @@ const Conversation = ({conversation, emojis, lastIdx, loading }) => {
 			onClick={() => setSelectedConversation(conversation)}
 			>
 				<div className={`avatar ${isOnline ? "online" : ""}`}>
-					<div className='w-12 rounded-full' disabled={loading}>
-						{!loading ? <img
-							src={conversation.profilePic}
-							alt='user avatar'
-						/>: <span className='loading loading-spinner'></span>}
+					<div className='w-12 rounded-full'>
+					      <img src={conversation.profilePic} alt='user avatar' />
 					</div>
 				</div>
 

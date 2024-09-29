@@ -6,8 +6,8 @@ import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
 	const {loading, messages} = useGetMessages()
-	const lastMessageRef = useRef()
 	useListenMessages()
+	const lastMessageRef = useRef()
 	// console.log("messages the : ", messages)
 
 	useEffect(() => {
@@ -23,7 +23,7 @@ const Messages = () => {
 			messages.length > 0 && 
 			messages.map((message) => (
 				<div key={message._id} ref={lastMessageRef}>
-				  <Message key={message._id} message={message}/>
+				  <Message message={message}/>
 				</div>
 			))}
 			

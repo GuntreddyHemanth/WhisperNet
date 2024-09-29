@@ -6,11 +6,9 @@ import useConversation from "../../zustand/useConverstaion"
 const Message = ({message}) => {
     const {authUser} = useAuthContex()
     const {selectedConversation} = useConversation()
-    if (!authUser || !selectedConversation) {
-        return null; // Or a loading spinner, depending on the case
-    }
     const fromMe = message.senderId === authUser._id
     const formatedTime = extractTime(message.createdAt)
+    // const formatedTime = message.createdAt ? extractTime(message.createdAt) : "Unknown time"; // Fallback for time
     const chatClassName = fromMe ? "chat-end" : "chat-start";
     const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic
     const bubbleBgColor = fromMe ? "bg-blue-500" : ""

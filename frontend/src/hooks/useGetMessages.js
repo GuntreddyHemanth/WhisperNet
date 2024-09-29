@@ -8,7 +8,6 @@ const useGetMessages = () => {
     const {messages, setMessages, selectedConversation} = useConversation()
 
     useEffect(() => {
-        console.log("Selected conversation ID:", selectedConversation?._id);
         const getMessages = async () => {
             setLoading(true)
             try {
@@ -18,7 +17,7 @@ const useGetMessages = () => {
                 if (data.error) throw new Error(data.error)
                 setMessages(data)
             } catch (error) {
-               toast.error(error.message)  
+               toast.error(error.response?.data?.error || error.message)  
             }finally{
                 setLoading(false)
             }

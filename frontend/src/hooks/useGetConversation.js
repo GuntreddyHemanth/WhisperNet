@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 const useGetConversation = () => {
     const [loading, setLoading] = useState(false);
-    const [conversation, setConversation] = useState([]);
+    const [conversations, setConversations] = useState([]);
 
     useEffect(() => {
         const getConversation = async () => {
@@ -15,7 +15,7 @@ const useGetConversation = () => {
                 if (data.error){
                     throw new Error(data.error)
                 }
-                setConversation(data)
+                setConversations(data)
             } catch (error) {
                 toast.error(error.message)
             }finally{
@@ -24,7 +24,7 @@ const useGetConversation = () => {
         }
         getConversation()
     }, [])
-    return {loading, conversation}
+    return {loading, conversations}
 }
 
 export default useGetConversation

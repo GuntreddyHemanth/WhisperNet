@@ -1,6 +1,6 @@
 const Conversation = require("../modles/conversation.model");
 const Message = require("../modles/messages.model");
-const { getReceiverSocketId } = require("../sockets/socket");
+const { getReceiverSocketId, io} = require("../sockets/socket");
 
 
 module.exports.sendMessage = async (req, res) => {
@@ -35,18 +35,20 @@ module.exports.sendMessage = async (req, res) => {
 
         await Promise.all([conversation.save(), newMessage.save()]); // this will run paralle with out any delay basical these two start at same time 
 
-        const sendMessage = (newMessage, receiverId) => {
-            const receiverSocketId = getReceiverSocketId(receiverId);
-            if (receiverSocketId) {
-                io.to(receiverSocketId).emit("newMessage", newMessage);
-            } else {
-                console.log("Receiver is not online");
-            }
-        };        
-
-        res.status(201).json({
-            newMessage
-        })
+        // const sendMessage = (newMessage, receiverId) => {
+        //     const receiverSocketId = getReceiverSocketId(receiverId);
+        //     if (receiverSocketId) {
+        //         io.to(receiverSocketId).emit("newMessage", newMessage);
+        //     } else {
+        //         console.log("Receiver is not online");
+        //     }
+        // };
+        
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
+        res.status(201).json(newMessage)
 
     } catch (error) {
         console.log("error in sendingMessage controller: ", error.message)
