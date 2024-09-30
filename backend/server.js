@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser")
 const { app, server } = require("./sockets/socket")
 
 
-const PORT = process.env.PORT || 8000; // This will use 5000 if set in .env
+const PORT = process.env.PORT || 5000; // This will use 5000 if set in .env
 
 // const __dirname = path.resolve()
 
